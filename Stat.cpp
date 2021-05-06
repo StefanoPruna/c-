@@ -6,6 +6,7 @@ int main()
   int weight;
   //string planetFight;
   char planetFight[10];
+  //std::string myVar;
 
   std::cout << "Insert your weight from 0.38 to 2.34:\n";
   std::cin >> weight;
