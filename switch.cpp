@@ -1,7 +1,22 @@
 #include <iostream>
+#include <string>
 
 int main()
 {
+  //Switch doesn't work well with string, for string, use if statements
+  /*std::string day;
+  std::cout << "What day is it\n";
+  std::cin >> day;
+
+  // switch (day)
+  // {
+  // case 'Monday':
+  //   /* code */
+  //   break;
+  
+  // default:
+  //   break;
+  // }*/
     int number;
     
     std::cout << "Enter a number between 1 and 9:\n";

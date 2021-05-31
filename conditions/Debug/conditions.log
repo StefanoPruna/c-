@@ -1,0 +1,11 @@
+﻿  conditions.cpp
+d:\documents\github\c++\conditions\conditions.cpp(40): error C2450: switch expression of type 'std::string' is illegal
+  d:\documents\github\c++\conditions\conditions.cpp(40): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+d:\documents\github\c++\conditions\conditions.cpp(41): error C2440: 'type cast': cannot convert from 'const char [7]' to 'int'
+  d:\documents\github\c++\conditions\conditions.cpp(41): note: There is no context in which this conversion is possible
+d:\documents\github\c++\conditions\conditions.cpp(41): error C2046: illegal case
+d:\documents\github\c++\conditions\conditions.cpp(44): error C2065: 'b': undeclared identifier
+d:\documents\github\c++\conditions\conditions.cpp(44): error C2131: expression did not evaluate to a constant
+  d:\documents\github\c++\conditions\conditions.cpp(44): note: a non-constant (sub-)expression was encountered
+d:\documents\github\c++\conditions\conditions.cpp(44): error C2051: case expression not constant
+d:\documents\github\c++\conditions\conditions.cpp(47): warning C4060: switch statement contains no 'case' or 'default' labels

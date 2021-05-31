@@ -1,0 +1,3 @@
+﻿  startingWithC.cpp
+d:\documents\github\c++\startingwithc\startingwithc.cpp(19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  startingWithC.vcxproj -> D:\Documents\Github\c++\startingWithC\Debug\startingWithC.exe

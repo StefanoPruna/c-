@@ -1,5 +1,9 @@
-// exerciseOne.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+/* exerciseOne.cpp : This file contains the 'main' function. Program execution begins and ends there.
+to run the program from the terminal, run:
+g++ filename.cpp
+./a.out
+Everytime I update the code, I have to run both commands!!!
+*/
 
 #include <iostream>
 #include <string>
@@ -11,6 +15,9 @@ int main()
 	//First part of the exercise, ask for my name and student ID and display them in the console
 	string myName;
 	int myId;
+
+	//to make the var private, use constant
+	//const int theId;
 
 	cout << "Please enter your name:\n";
 	cin >> myName;
