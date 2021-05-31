@@ -24,11 +24,18 @@ int main()
 
 	cout << "Please enter your name:";
 	cin >> yourName;
+
 	cout << "Please enter your family name:";
 	cin >> yourSurname;
 
 	cout << "Hello " << yourName << " "<< yourSurname << "\n";
 
-	cout << "Address of name: " << &yourName << endl;
-	cout << "Address of family name: " << &yourSurname << endl;
+	/*cout << "Address of name: " << &yourName << endl;
+	cout << "Address of family name: " << &yourSurname << endl;*/
+
+	//Another way to do it:
+	string *ptrName = &yourName;
+	string* ptrSurname = &yourSurname; //Preferred
+	cout << "Address of name: " << ptrName << "\n";
+	cout << "Address of family name: " << ptrSurname << "\n";
 }
