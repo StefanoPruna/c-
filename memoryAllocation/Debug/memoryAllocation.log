@@ -1,0 +1,3 @@
+﻿  memoryAllocation.cpp
+d:\documents\github\c++\memoryallocation\memoryallocation.cpp(23): warning C4551: function call missing argument list
+  memoryAllocation.vcxproj -> D:\Documents\Github\c++\memoryAllocation\Debug\memoryAllocation.exe
