@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -59,32 +60,41 @@ int main()
 	return 0;*/
 
 	//Challenge Task
-	int names;
-	int* pointer;
+	int t;
+	string nameArray[5];
+	string* pointer = {};
 
 	cout << "How many name you want to store?\n";
-	cin >> names;
-	string* nameArray = new string[names];
-	pointer = new (nothrow) int[names];
-	if (pointer == 0)
+	cin >> t;
+
+	if (t == 0)
 	{
 		cout << "Zero name selected\n";
 		return 0;
 	}
 	else
 	{
-		for (int n = 1; n < names; n++)
-		{
-			cout << "Please enter name " << n << ": " << "\n";
-			cin >> pointer[n];
-			*nameArray = pointer[n];
-		}
+		for (int i = 0; i < t; i++)
+			{
+				cout << "Please enter name " << i + 1 << ":\n";
+				cin >> nameArray[i];
+				pointer = nameArray;
+			}
+			//getline(cin, names);	
 		cout << "First address of array is: " << &pointer << "\n";
-		for (int n = 0; n < names; n++)
+
+		for (int i = 0; i < t; i++)
 		{
-			cout << *pointer << "\n";
+			cout << "First character of name " << i + 1 << " is:\n";
+			cout << pointer[i][0] << "\n";
 		}
-		delete[] pointer, nameArray;
+		for (int i = 0; i < t; i++)
+			cout << pointer[i] << "\n";
+
+		pointer = NULL;
 	}
+	system("pause");
+	return 0;		
+	delete[] pointer;
 }
 
