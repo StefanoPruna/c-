@@ -60,12 +60,17 @@ int main()
 	return 0;*/
 
 	//Challenge Task
+
 	int t;
-	string nameArray[5];
-	string* pointer = {};
+
+	//string* nameArray = {};
+	//string nameArray = {}; I should use this, but it gives an error on line 82 point = nameArray;
+	//string* pointer = {}; I don't need this var
 
 	cout << "How many name you want to store?\n";
 	cin >> t;
+
+	string* nameArray = new string[t]; //this is the line missing
 
 	if (t == 0)
 	{
@@ -78,23 +83,23 @@ int main()
 			{
 				cout << "Please enter name " << i + 1 << ":\n";
 				cin >> nameArray[i];
-				pointer = nameArray;
+				//pointer = nameArray;
 			}
 			//getline(cin, names);	
-		cout << "First address of array is: " << &pointer << "\n";
+		cout << "First address of array is: " << &nameArray << "\n";
 
 		for (int i = 0; i < t; i++)
 		{
 			cout << "First character of name " << i + 1 << " is:\n";
-			cout << pointer[i][0] << "\n";
+			cout << nameArray[i][0] << "\n";
 		}
 		for (int i = 0; i < t; i++)
-			cout << pointer[i] << "\n";
+			cout << nameArray[i] << "\n";
 
-		pointer = NULL;
+		nameArray = NULL;
 	}
 	system("pause");
 	return 0;		
-	delete[] pointer;
+	delete[] nameArray;
 }
 
