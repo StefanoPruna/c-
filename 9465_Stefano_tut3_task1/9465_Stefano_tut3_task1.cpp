@@ -9,7 +9,7 @@ using namespace std;
 int a, b;
 int mySum(int, int);
 
-int main()
+int mainOne()
 {
 	cout << "Please enter the first number:\n";
 	cin >> a;
@@ -17,6 +17,7 @@ int main()
 	cin >> b;
 
 	mySum(a, b);
+	return 0;
 }
 
 int mySum(int a,int b)

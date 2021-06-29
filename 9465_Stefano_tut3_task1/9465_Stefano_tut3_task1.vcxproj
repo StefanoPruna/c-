@@ -151,6 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\9465_Stefano_tut3_task2\9465_Stefano_tut3_task2.cpp" />
+    <ClCompile Include="..\9465_Stefano_tut3_task3\9465_Stefano_tut3_task3.cpp" />
     <ClCompile Include="9465_Stefano_tut3_task1.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

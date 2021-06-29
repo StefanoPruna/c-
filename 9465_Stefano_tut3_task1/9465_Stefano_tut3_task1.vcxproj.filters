@@ -18,5 +18,11 @@
     <ClCompile Include="9465_Stefano_tut3_task1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\9465_Stefano_tut3_task2\9465_Stefano_tut3_task2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\9465_Stefano_tut3_task3\9465_Stefano_tut3_task3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
