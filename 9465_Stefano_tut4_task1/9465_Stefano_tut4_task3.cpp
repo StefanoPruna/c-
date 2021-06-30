@@ -5,7 +5,16 @@ using namespace std;
 
 void myFibonacci(int numb)
 {
-	numb = (numb - 1) + (numb - 2);
+	int numbOne = 0;
+	int numbTwo = 1;
+	int checkNumber = numb;
+
+	for (int i = 1; i < checkNumber; i++)
+	{
+		numb = numbOne + numbTwo;
+		numbOne = numbTwo;
+		numbTwo = numb;
+	}
 
 	cout << numb;
 }
