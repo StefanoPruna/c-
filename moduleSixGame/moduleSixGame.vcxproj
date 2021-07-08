@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{87C97483-6605-4BBB-B8B1-280C97B904E5}</ProjectGuid>
+    <ProjectGuid>{1658F31F-3F13-4D3D-A2F0-4C00D1D34B59}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>assessmentTest</RootNamespace>
+    <RootNamespace>moduleSixGame</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -151,12 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="assessmentTest.cpp" />
+    <ClCompile Include="moduleSixGame.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Inventory.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="numbGenerator.h" />
+    <ClInclude Include="UIScreen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

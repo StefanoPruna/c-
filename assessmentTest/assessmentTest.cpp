@@ -3,10 +3,14 @@
 
 #include <iostream>
 #include <string>
+#include <stdlib.h> //random library
+#include "Player.h"
+#include "Enemy.h"
+#include "Inventory.h"
 
 using namespace std;
 
-string playerName, playerClass, playerChoice;
+string playerName, playerChoice;
 
 void partOne()
 {
@@ -26,6 +30,8 @@ void partOne()
 
 int main()
 {
+	Player yourChoice;
+
 	cout <<         "	***************************************\n"
 					"	|   Hello, Adventurer!!!              |\n"
 					"	|				      |\n"
@@ -34,12 +40,15 @@ int main()
 					"	***************************************\n"
 					"        |  Insert the name of your character: |\n\n";
 	cin >> playerName;
+	system("pause");
 	cout << "\033[2J\033[H"; //Refresh the screen
 
-	cout << "Hello " << playerName << "! choose your class:\n (Ninja: health=20, strength=6; Warrior: Health=10, strength=12; Wizard: health=14, strength=8):\n";
-	cin >> playerClass;
-
+	yourChoice.whatChoice(playerName);
+	cout << "Nice choice " << playerName << ", you look scary for a " << yourChoice.character << "!! I hope you are ready for the adventure!\n";
+	system("pause");
 	cout << "\033[2J\033[H"; //Refresh the screen
 	partOne();
+
+	return 0;
 }
 
