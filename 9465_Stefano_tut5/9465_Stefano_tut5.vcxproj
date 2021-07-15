@@ -153,8 +153,6 @@
   <ItemGroup>
     <ClCompile Include="9465_Stefano_tut5.cpp" />
     <ClCompile Include="9465_Stefano_tut5_task2.cpp" />
-    <ClCompile Include="9465_Stefano_tut5_task3.cpp" />
-    <ClCompile Include="9465_Stefano_tut5_task4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Date.h" />

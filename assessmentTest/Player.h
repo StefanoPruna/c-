@@ -17,7 +17,7 @@ public:
 void Player::whatChoice(string name)
 {
 	bool rightClass = false;
-
+	
 	while (rightClass == false)
 	{
 		cout << "Hello " << name << "! choose your class:\n (Ninja: health=20, strength=6; Warrior: Health=10, strength=12; Wizard: health=14, strength=8):\n";
