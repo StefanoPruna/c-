@@ -1,37 +1,36 @@
-// assessmentTest.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <string>
 #include <stdlib.h> //random library
 #include <time.h>
-#include "Player.h"
-#include "Enemy.h"
-#include "Inventory.h"
-#include "Continue.h"
+#include "resumeGame.h"
 
 using namespace std;
 
-string playerName, playerChoice, playerSecondChoice, playerThirdChoice, playerFinish;
+string answer;
+resumeGame resume;
+
+string playerChoice, playerSecondChoice, playerThirdChoice, playerFinish;
 bool rightChoice = false; //Needed for error handling with the loops
+
 int dice;
 int* pDice = &dice;
+
+int zone;
 
 //This function is called when the player wants to exit the game
 int exitTheGame()
 {
 	system("pause");
 	cout << "\033[2J\033[H"; //Refresh the screen
-	cout << "Ok, thank you for coming, have a nice day! I'm going to make a coffee...\n";	
+	cout << "Ok, thank you for coming, have a nice day! I'm going to make a coffee...\n";
 	system("pause");
 
 	return 0;
 }
 
 //This function is called at the end of a battle
-void drinkPotion(int health, int strength, int coins, int potion, string zone)
+void drinkPotion(int health, int strength, int coins, int potion, int zone)
 {
-	system("pause");
 	cout << "\033[2J\033[H"; //Refresh the screen
 	if (potion > 0)
 	{
@@ -45,13 +44,13 @@ void drinkPotion(int health, int strength, int coins, int potion, string zone)
 				health += 4;
 				potion -= 1;
 				cout << "Your health now is " << health << " and you have " << potion << " potion/s left.\n";
-				//keepGoing(health, strength, coins, potion, zone); //calls this function to check what zone restart the game
+				resume.keepGoing(health, strength, coins, potion, zone);//calls this function to check what zone restart the game
 				rightChoice = true;
 			}
 			else if (playerChoice == "No" || playerChoice == "no")
 			{
 				cout << "Ok, let's keep going with the adventure!\n";
-				keepGoing(health, strength, coins, potion, zone); //calls this function to check what zone restart the game
+				resume.keepGoing(health, strength, coins, potion, zone); //calls this function to check what zone restart the game
 				rightChoice = true;
 			}
 			else
@@ -61,20 +60,21 @@ void drinkPotion(int health, int strength, int coins, int potion, string zone)
 	else
 	{
 		cout << "Sorry, but you don't have any potion...good luck!\n";
-		keepGoing(health, strength, coins, potion, zone); //calls this function to check what zone restart the game
+		resume.keepGoing(health, strength, coins, potion, zone); //calls this function to check what zone restart the game
 	}
 }
 
 //All the fighting monsters functions; the functions are called when the player encounters a monster and decides to attack
-void fightGoblin(int health, int strength, int coins, int potion, string zone)
+void fightGoblin(int health, int strength, int coins, int potion, int zone)
 {
 	cout << "fight the goblin test\n";
+	resume.keepGoing(health, strength, coins, potion, zone+1);
 }
 
 //This function is called when player chose to run from the monster instead of fighting
-void runFromMonster(int health, int strength, int coins, int potion, string zone)
+void runFromMonster(int health, int strength, int coins, int potion, int zone)
 {
-	srand(time(NULL));//setup random number
+	//srand(time(NULL));//setup random number
 	cout << "You choose to run?!?! Seriously!?!?\n";
 	dice = rand() % 15; //random number from 0 to 1
 	cout << "The Monster is trying to attack you while running away! Your health is: " << health << " and his attack is: " << dice << "\n";
@@ -97,8 +97,8 @@ void runFromMonster(int health, int strength, int coins, int potion, string zone
 					exitTheGame();
 				else if (playerFinish == "Yes" || playerFinish == "yes")
 				{
-					health += 10;					
-					keepGoing(health, strength, coins, potion, zone);
+					health += 10;
+					resume.keepGoing(health, strength, coins, potion, zone);
 					rightChoice = true;
 				}
 				else
@@ -112,14 +112,44 @@ void runFromMonster(int health, int strength, int coins, int potion, string zone
 	{
 		cout << "You are lucky! Because your strength is " << strength << ", the monster didn't get you!\n"
 			"You managed to run from the monster\n";
-		keepGoing(health, strength, coins, potion, zone); //calls this function to check what zone restart the game
+		resume.keepGoing(health, strength, coins, potion, zone); //calls this function to check what zone restart the game
+	}
+}
+
+//Third part of the game
+void partThree(int health, int strength, int coins, int potion, int zone)
+{
+	cout << "this is the third part\n"
+	"Do you want to go back or keep going?\n";
+	cin >> answer;
+	if (answer == "yes")
+		resume.keepGoing(health, strength, coins, potion, zone - 1);
+	else
+	{
+		cout << "let's stay in the zone 2" << zone << "\n";
+		resume.keepGoing(health, strength, coins, potion, zone + 1);
+	}
+}
+
+//Second part of the game
+void partTwo(int health, int strength, int coins, int potion, int zone)
+{
+	cout << "this is the second part\n"
+		"Do you want to go back or keep going?\n";
+	cin >> answer;
+	if (answer == "yes")
+		resume.keepGoing(health, strength, coins, potion, zone - 1);
+	else
+	{
+		cout << "let's stay in the zone 2" << zone << "\n";
+		resume.keepGoing(health, strength, coins, potion, zone + 1);
 	}
 }
 
 //First part of the game
-void partOne(int health, int strength, int coins, int potion)
+void partOne(int health, int strength, int coins, int potion, int zone)
 {
-	string zone = "zoneOne"; //Needed to indentify at what part of the adventure the player is
+	//zone = 1; //Needed to indentify at what part of the adventure the player is
 
 	while (rightChoice == false)
 	{
@@ -175,49 +205,12 @@ void partOne(int health, int strength, int coins, int potion)
 }
 
 //This function is called when the story is still going after a fight, after drinking a potion or player dies etc...
-void keepGoing(int health, int strength, int coins, int potion, string zone)
+void resumeGame::keepGoing(int health, int strength, int coins, int potion, int zone)
 {
-	if (zone == "zoneOne")
-	{
-		partOne(health, strength, coins, potion);
-	}
-	else if (zone == "zoneTwo")
-	{
-
-	}
+	if (zone == 1)
+		partOne(health, strength, coins, potion, zone);
+	else if (zone == 2)
+		partTwo(health, strength, coins, potion, zone);
+	else
+		partThree(health, strength, coins, potion, zone);
 }
-
-//The very beginning, the game asks for name and character
-int main()
-{
-	//calls the Player and Inventory classes
-	Player yourChoice;
-	Inventory playerInventory;
-	Continue resumeGame;
-
-	cout <<         "	***************************************\n"
-					"	|   Hello, Adventurer!!!              |\n"
-					"	|				      |\n"
-					"	|   Welcome to the Fantasy Adventure! |\n"
-					"	|                                     |\n"
-					"	***************************************\n"
-					"        |  Insert the name of your character: |\n\n";
-	cin >> playerName;
-	system("pause");
-	cout << "\033[2J\033[H"; //Refresh the screen
-
-	yourChoice.whatChoice(playerName);
-	cout << "Nice choice " << playerName << ", you look scary for a " << yourChoice.character << "!! I hope you are ready for the adventure!\n";
-	system("pause");
-	cout << "\033[2J\033[H"; //Refresh the screen
-
-	int playerHealth = yourChoice.health;
-	int playerStrength = yourChoice.strength;
-
-	int coins = playerInventory.coins;
-	int potions = playerInventory.potion;
-	partOne(playerHealth, playerStrength, coins, potions);//calling the function, first part of the adventure
-	
-	return 0;
-}
-

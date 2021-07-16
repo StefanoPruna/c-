@@ -1,5 +1,4 @@
 #pragma once
-
 #include <iostream>
 #include <string>
 
@@ -17,7 +16,7 @@ public:
 void Player::whatChoice(string name)
 {
 	bool rightClass = false;
-	
+
 	while (rightClass == false)
 	{
 		cout << "Hello " << name << "! choose your class:\n (Ninja: health=20, strength=6; Warrior: Health=10, strength=12; Wizard: health=14, strength=8):\n";
@@ -44,4 +43,5 @@ void Player::whatChoice(string name)
 			cout << "Sorry, but the " << character << " class will be available in the sequel...when I will make it!\n";
 	}
 }
+
 

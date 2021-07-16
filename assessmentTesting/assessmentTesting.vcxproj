@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{87C97483-6605-4BBB-B8B1-280C97B904E5}</ProjectGuid>
+    <ProjectGuid>{C0C85C10-53F4-43F4-89DC-B84D35CDE30A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>assessmentTest</RootNamespace>
+    <RootNamespace>assessmentTesting</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -151,13 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="assessmentTest.cpp" />
+    <ClCompile Include="assessmentTesting.cpp" />
+    <ClCompile Include="resumeGame.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Continue.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Inventory.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="keepGoingGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
