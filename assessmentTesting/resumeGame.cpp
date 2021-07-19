@@ -48,7 +48,7 @@ void partOne(int zone)
 
 void keepGoingGame::keepGoing(int zone)
 {
-	
+	resume.whatC();
 	if (zone == 1)
 	{
 		//zone = "zoneTwo";
@@ -80,4 +80,19 @@ void keepGoingGame::goBack(int zone)
 		zone -= 1;
 	}
 	drink(zone);
+}
+
+void keepGoingGame::whatC()
+{
+	while (prightClass = false)
+	{
+		cout << "this is a test\n";
+		cin >> character;
+		if (character == "yes")
+			*prightClass = true;
+		else
+			cout << "try again with yes\n";
+	}
+
+	delete prightClass;
 }

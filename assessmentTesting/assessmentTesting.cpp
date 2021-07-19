@@ -15,6 +15,8 @@ int main()
 	keepGoingGame resumeGame;
 	int zone;
 
+	resumeGame.whatC();
+
 	cout << "what zone is it? 1 or 2\n";
 	cin >> zone;
 
