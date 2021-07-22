@@ -10,5 +10,6 @@ class Enemy
 public:
 	string name;
 	int healthEnemy, damage;
+	void whatEnemy(string name);
 };
 
