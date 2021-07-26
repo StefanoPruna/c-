@@ -7,7 +7,22 @@ using namespace std;
 
 class Inventory
 {
+private:
+	int* coins;
+	int* potion;
 public:
-	int coins = 0, potion = 0;
+	Inventory(int &coins, int &potion)
+	{
+		this->coins = &coins;
+		this->potion = &potion;
+	}	
+
+	//Deconstructor
+	~Inventory()
+	{
+		delete this;
+	}
 };
+
+
 

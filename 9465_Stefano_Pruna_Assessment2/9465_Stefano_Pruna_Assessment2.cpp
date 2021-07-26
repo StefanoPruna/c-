@@ -16,10 +16,10 @@ int main()
 {
 	//calls the Player, Inventory and resumeGame classes
 	Player yourChoice;
-	Inventory playerInventory;
+	//Inventory playerInventory;
 	resumeGame storyTell;
 	
-
+	//The game starts here
 	cout << "	***************************************\n"
 		"	|   Hello, Adventurer!!!              |\n"
 		"	|				      |\n"
@@ -31,6 +31,7 @@ int main()
 	system("pause");
 	cout << "\033[2J\033[H"; //Refresh the screen
 
+	//call the function in the Player class
 	yourChoice.whatChoice(playerName);
 	cout << "Nice choice " << playerName << ", you look scary for a " << yourChoice.character << "!! I hope you are ready for the adventure!\n";
 	system("pause");
@@ -39,12 +40,15 @@ int main()
 	int playerHealth = yourChoice.health;
 	int playerStrength = yourChoice.strength;
 
-	int coins = playerInventory.coins;
-	int potions = playerInventory.potion;
-
+	int coins = 0;
+	int potion = 0;
+	Inventory* inventory = new Inventory(coins, potion);
+	/*int coins = playerInventory.coins;
+	int potions = playerInventory.potion;*/
 	
 	//calling the function, first part of the adventure
-	storyTell.keepGoing(playerHealth, playerStrength, coins, potions, 1);
+	storyTell.keepGoing(playerHealth, playerStrength, coins, potion, 1);
 
 	return 0;
+	delete inventory;
 }

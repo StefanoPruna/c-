@@ -9,7 +9,18 @@ using namespace std;
 
 int main()
 {
-	string name, subjects, address;
+	string name = "Loske";
+	string subjects = "Math";
+	string address = "Melbourne";
+	int semester = 1;
+	double GPA = 0.0;
+
+	Student* studentOne = new Student(name, address, subjects, semester, GPA);
+
+	//copy constructor
+	Student* studentTwo = new Student(*studentOne);
+
+	//The way I did
 	//Student* studentDetails;
 
 	/*studentDetails.detailStudent("loske", "Math", "Melbourne");
@@ -19,16 +30,12 @@ int main()
 	//studentDetails.displayStudent();	
 	//studentDetails.modifyStudy();
 
-	Student* studentOne = new Student(name, subjects, address);
-	*studentOne->getName();
-
 	//copy constructor
 	/*Student studentTwo = studentDetails;
 	studentTwo.detailStudent("Victoria", "IT", "Glenroy");
 	studentTwo.displayStudent();
 	studentTwo.modifyStudy();*/
 
-	Student* studentTwo = new Student(*studentOne);
-
 	return 0;
+	delete studentOne, studentTwo;
 }
