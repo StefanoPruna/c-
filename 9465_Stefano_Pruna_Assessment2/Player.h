@@ -18,7 +18,7 @@ private:
 
 string Player::whatChoice(string name)
 {
-	this->rightClass = rightClass; //pointer to the bool var
+	this->rightClass = rightClass; //Created a constructor pointing to the bool var
 
 	while (rightClass == false)
 	{

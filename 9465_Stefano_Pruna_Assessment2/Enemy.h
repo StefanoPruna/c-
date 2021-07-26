@@ -8,7 +8,7 @@ using namespace std;
 class Enemy
 {
 public:
-	string name;
+	string monsterName;
 	int healthEnemy, damage;
 	void whatEnemy(string name);
 };

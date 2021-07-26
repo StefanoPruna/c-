@@ -27,7 +27,9 @@ string* pointFinish = &playerFinish;
 string* pointAnswer = &answer;
 bool* pointRightChoice = &rightChoice;
 int* pDice = &dice; 
+
 //Pointing to the monster's ability
+string* pointName = &monsterPlay.monsterName;
 int* pointMonsterHealth = &monsterPlay.healthEnemy;
 int* pointMonsterDamage = &monsterPlay.damage;
 
@@ -84,17 +86,15 @@ int drinkPotion(int health, int strength, int coins, int potion, int zone)
 	}
 
 	return health, strength, coins, potion, zone;
-	delete pointRightChoice, pointPlayerChoice; //remove the bool var from the memory that is not needed anymore
+	delete pointRightChoice, pointPlayerChoice, playerChoice, rightChoice; //remove the bool var from the memory that is not needed anymore
 }
 
 //All the fighting monsters functions; the functions are called when the player encounters a monster and decides to attack
-int fightGoblin(int health, int strength, int coins, int potion, int zone)
-{
-	monsterPlay.whatEnemy("Goblin");
-	
+int fightMonster(int health, int strength, int coins, int potion, int zone)
+{	
 	cout << "You chose to fight, good job! Let's see how you go!"
 		"Good luck!\n";
-	cout << "The Goblin's health is " << *pointMonsterHealth << " and damages for " << *pointMonsterDamage << " point.\n";
+	cout << "The " << *pointName << "'s health is " << *pointMonsterHealth << " and damages for " << *pointMonsterDamage << " point.\n";
 	system("pause");
 
 	while (*pointMonsterHealth > 0)
@@ -105,16 +105,16 @@ int fightGoblin(int health, int strength, int coins, int potion, int zone)
 		//If the dice is equal or less than player's strength, the player's attack is successful
 		if (*pDice <= strength)
 		{
-			cout << "Good, your attack is successful!You damage the Goblin of " << strength << " points!\n";
+			cout << "Good, your attack is successful!You damage the " << *pointName << " of " << strength << " points!\n";
 			*pointMonsterHealth -= strength;
-			cout << "Your health is now " << health << " and monster's health is: " << *pointMonsterHealth << "\n";
+			cout << "Your health is now " << health << " and " << *pointName << "'s health is: " << *pointMonsterHealth << "\n";
 			system("pause");
 			//When the enemy's health is equal or less than zero, it'll die
 		}
 		//Otherwise, the Monster will attack and damage the player
 		else
 		{
-			cout << "Unfortunately, you missed the monster! And the monster managed to hit you!"
+			cout << "Unfortunately, you missed the " << *pointName << "! And the monster managed to hit you!"
 				"It damaged you " << *pointMonsterDamage << " points!\n";
 			health -= *pointMonsterDamage;
 			cout << "Your health is now " << health << " and enemy's health is: " << *pointMonsterHealth << "\n";
@@ -178,7 +178,7 @@ int fightGoblin(int health, int strength, int coins, int potion, int zone)
 	coins += 10;
 	potion += 1;
 	cout << "\033[2J\033[H"; //Refresh the screen
-	cout << "You managed to kill the Goblin!!! Good job!!!\n" "|^d^| \n"
+	cout << "You managed to kill the " << *pointName << "!!! Good job!!!\n" "|^d^| \n"
 		"You obtained a potion of health that gives you 4 point of health if you drink it and 10 gold coins!"
 		"Now you have " << potion << " potions and " << coins << " gold coins.\n"
 		"I didn't expect from you, but you proved me wrong!\n"
@@ -188,7 +188,8 @@ int fightGoblin(int health, int strength, int coins, int potion, int zone)
 	drinkPotion(health, strength, coins, potion, zone + 1);
 
 	return health, strength, coins, potion, zone;
-	delete pointMonsterDamage, pointMonsterHealth, pDice, pointRightChoice, pointFinish;//remove the variables from the memory
+	//remove all the variables from the memory
+	delete pointName, pointMonsterDamage, pointMonsterHealth, pDice, pointRightChoice, pointFinish, playerFinish, dice, monsterPlay.monsterName, monsterPlay.healthEnemy, monsterPlay.damage;
 }
 
 //This function is called when player chose to run from the monster instead of fighting
@@ -236,7 +237,7 @@ int runFromMonster(int health, int strength, int coins, int potion, int zone)
 	}
 
 	return health, strength, coins, potion, zone;
-	delete pDice, pointRightChoice, pointFinish;//remove the variables from the memory that is not needed anymore
+	delete pDice, pointRightChoice, pointFinish, dice, rightChoice, playerFinish;//remove the variables from the memory that is not needed anymore
 }
 
 //Third part of the game
@@ -254,7 +255,7 @@ int partThree(int health, int strength, int coins, int potion, int zone)
 	}
 
 	return health, strength, coins, potion, zone;
-	delete pointRightChoice, pointAnswer;//remove the bool var from the memory that is not needed anymore
+	delete pointRightChoice, pointAnswer, rightChoice, answer;//remove the bool var from the memory that is not needed anymore
 }
 
 //Second part of the game
@@ -266,12 +267,12 @@ int partTwo(int health, int strength, int coins, int potion, int zone)
 	cin >> *pointAnswer;
 	while (*pointRightChoice == false)
 	{
-		if (*pointAnswer == "yes" || answer == "Yes")
+		if (*pointAnswer == "yes" || *pointAnswer == "Yes")
 		{
 			cout << "let's keep going with the story!\n";
 			resume.keepGoing(health, strength, coins, potion, zone + 1);
 		}
-		else if (*pointAnswer == "No" || answer == "no")
+		else if (*pointAnswer == "No" || *pointAnswer == "no")
 		{
 			cout << "let's go back to the previous intersection then\n";
 			resume.keepGoing(health, strength, coins, potion, zone - 1);
@@ -281,7 +282,7 @@ int partTwo(int health, int strength, int coins, int potion, int zone)
 	}
 
 	return health, strength, coins, potion, zone;
-	delete pointRightChoice, pointAnswer;//remove the bool var from the memory that is not needed anymore
+	delete pointRightChoice, pointAnswer, rightChoice, answer;//remove the bool var from the memory that is not needed anymore
 }
 
 //First part of the game
@@ -302,7 +303,9 @@ int partOne(int health, int strength, int coins, int potion, int zone)
 				cin >> *pointSecondChoice;
 				if (*pointSecondChoice == "Fight" || *pointSecondChoice == "fight")
 				{
-					fightGoblin(health, strength, coins, potion, zone);
+					//Calls the functions to fight against the Goblin monster
+					monsterPlay.whatEnemy("Goblin");
+					fightMonster(health, strength, coins, potion, zone);
 					*pointRightChoice = true;
 				}
 				else if (*pointSecondChoice == "run" || *pointSecondChoice == "Run")
@@ -318,12 +321,14 @@ int partOne(int health, int strength, int coins, int potion, int zone)
 		{
 			while (*pointRightChoice == false)
 			{
-				cout << "You choose Right. A Monster is attacking you!\n"
+				cout << "You choose Right. A Skeleton is attacking you!\n"
 					"What do you do? Fight or Run?\n";
 				cin >> *pointThirdChoice;
 				if (*pointThirdChoice == "Fight" || *pointThirdChoice == "fight")
 				{
-					fightGoblin(health, strength, coins, potion, zone);
+					//Calls the functions to fight against the Goblin monster
+					monsterPlay.whatEnemy("Skeleton");
+					fightMonster(health, strength, coins, potion, zone);
 					*pointRightChoice = true;
 				}
 				else if (*pointThirdChoice == "run" || *pointThirdChoice == "Run")
@@ -342,7 +347,7 @@ int partOne(int health, int strength, int coins, int potion, int zone)
 	}
 
 	return health, strength, coins, potion, zone;
-	delete pointRightChoice, pointPlayerChoice, pointSecondChoice, pointThirdChoice;//remove the bool var from the memory that is not needed anymore
+	delete pointRightChoice, pointPlayerChoice, pointSecondChoice, pointThirdChoice, rightChoice, playerChoice, playerSecondChoice, playerThirdChoice;//remove the bool var from the memory that is not needed anymore
 }
 
 //This function is called when the story is still going after a fight, after drinking a potion or player dies etc...
@@ -359,8 +364,15 @@ void resumeGame::keepGoing(int health, int strength, int coins, int potion, int 
 void Enemy::whatEnemy(string name)
 {
 	if (name == "Goblin")
-		{
-			healthEnemy = 8;
-			damage = 4;
-		}
+	{
+		monsterName = "Goblin";
+		healthEnemy = 8;
+		damage = 4;
+	}
+	else if (name == "Skeleton")
+	{
+		monsterName = "Skeleton";
+		healthEnemy = 6;
+		damage = 4;
+	}
 }

@@ -8,6 +8,6 @@ using namespace std;
 class Inventory
 {
 public:
-	int coins, potion = 0;
+	int coins = 0, potion = 0;
 };
 
