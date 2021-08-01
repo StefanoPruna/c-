@@ -42,6 +42,8 @@ int main()
 
 	int coins = 0;
 	int potion = 0;
+
+	//Constructor for Inventory class
 	Inventory* inventory = new Inventory(coins, potion);
 	/*int coins = playerInventory.coins;
 	int potions = playerInventory.potion;*/
@@ -50,5 +52,6 @@ int main()
 	storyTell.keepGoing(playerHealth, playerStrength, coins, potion, 1);
 
 	return 0;
+	//remove the inventory constructor from memory
 	delete inventory;
 }

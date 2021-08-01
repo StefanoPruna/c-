@@ -86,7 +86,7 @@ int drinkPotion(int health, int strength, int coins, int potion, int zone)
 	}
 
 	return health, strength, coins, potion, zone;
-	delete pointRightChoice, pointPlayerChoice, playerChoice, rightChoice; //remove the bool var from the memory that is not needed anymore
+	delete pointRightChoice, pointPlayerChoice, playerChoice, rightChoice; //remove all the var from the memory that is not needed anymore
 }
 
 //All the fighting monsters functions; the functions are called when the player encounters a monster and decides to attack
@@ -255,7 +255,7 @@ int partThree(int health, int strength, int coins, int potion, int zone)
 	}
 
 	return health, strength, coins, potion, zone;
-	delete pointRightChoice, pointAnswer, rightChoice, answer;//remove the bool var from the memory that is not needed anymore
+	delete pointRightChoice, pointAnswer, rightChoice, answer;//remove all the var from the memory that is not needed anymore
 }
 
 //Second part of the game
@@ -282,7 +282,7 @@ int partTwo(int health, int strength, int coins, int potion, int zone)
 	}
 
 	return health, strength, coins, potion, zone;
-	delete pointRightChoice, pointAnswer, rightChoice, answer;//remove the bool var from the memory that is not needed anymore
+	delete pointRightChoice, pointAnswer, rightChoice, answer;//remove all the var from the memory that is not needed anymore
 }
 
 //First part of the game
@@ -347,7 +347,8 @@ int partOne(int health, int strength, int coins, int potion, int zone)
 	}
 
 	return health, strength, coins, potion, zone;
-	delete pointRightChoice, pointPlayerChoice, pointSecondChoice, pointThirdChoice, rightChoice, playerChoice, playerSecondChoice, playerThirdChoice;//remove the bool var from the memory that is not needed anymore
+	//remove the bool var from the memory that is not needed anymore
+	delete pointRightChoice, pointPlayerChoice, pointSecondChoice, pointThirdChoice, rightChoice, playerChoice, playerSecondChoice, playerThirdChoice;
 }
 
 //This function is called when the story is still going after a fight, after drinking a potion or player dies etc...
