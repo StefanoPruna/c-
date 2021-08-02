@@ -59,6 +59,8 @@ int exitTheGame()
 			system("pause");
 			exit(1);
 		}
+		/*else if (*pointPlayerChoice == "No" || *pointPlayerChoice == "no")
+			storyTell.keepGoing(playerHealth, playerStrength, coins, potion, 1);*/
 		else
 		{
 			throw InvalidUserInputException();
@@ -276,22 +278,32 @@ int runFromMonster(int health, int strength, int coins, int potion, int zone)
 int partThree(int health, int strength, int coins, int potion, int zone)
 {
 	cout << "this is the third part\n"
-	"Do you want to go back or keep going?\n";
+	"Do you want to keep going? Yes or No\n";
 	cin >> *pointAnswer;
-	/*try
+	try
 	{
-		if (*pointAnswer == "yes")
-			resume.keepGoing(health, strength, coins, potion, zone - 1);
+		if (*pointAnswer == "yes" || *pointAnswer == "Yes")
+		{
+			//to do
+			cout << "let's stay in the zone " << zone << "\n";
+		}
+		else if(*pointAnswer == "No" || *pointAnswer == "no")
+		{
+			cout << "let's go back to the zone " << zone -1 << "\n";
+			resume.keepGoing(health, strength, coins, potion, zone -1);
+		}
 		else
 		{
-			cout << "let's stay in the zone " << zone << "\n";
-			resume.keepGoing(health, strength, coins, potion, zone + 1);
+			cout << "invalid input\n";
+			partThree(health, strength, coins, potion, zone);
 		}
 	}
 	catch (InvalidUserInputException &pointAnswer)
 	{
 		cout << "Invalid input\n";
-	}	*/
+		system("pause");
+		partThree(health, strength, coins, potion, zone);
+	}	
 
 	return health, strength, coins, potion, zone;
 	delete pointAnswer, rightChoice, answer;//remove all the var from the memory that is not needed anymore
@@ -321,7 +333,7 @@ int partTwo(int health, int strength, int coins, int potion, int zone)
 	}
 
 	return health, strength, coins, potion, zone;
-	delete pointAnswer, rightChoice, answer;//remove all the var from the memory that is not needed anymore
+	delete pointAnswer, rightChoice, answer;//remove all the vars from the memory that are not needed anymore
 }
 
 //First part of the game
