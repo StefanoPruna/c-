@@ -7,9 +7,6 @@
 
 using namespace std;
 
-bool rightChoice = false;
-bool* pointRightChoice = &rightChoice;
-
 class InvalidUserInputException: public exception
 {
 public:
@@ -19,38 +16,40 @@ public:
 		}
 };
 
-using namespace std;
-
 int main()
 {
 	//int x = 10, y = 0; it will give an error
-
+	bool rightChoice = false;
 	int yourAge;
-
-	while (*pointRightChoice == false)
-	{
-		cout << "insert your age\n";
-		cin >> yourAge;
+	cout << "insert your age\n";
+	cin >> yourAge;
+	
 
 		try
 		{
 			if (yourAge > 0)
 			{
 				cout << "the program works\n";
-				*pointRightChoice = true;
+				rightChoice = true;
 			}
 			else
 			{
 				throw InvalidUserInputException();
-				//cout << "invalid input\n";
-			}			
+				cout << "invalid input\n";
+				rightChoice = false;
+			}
 		}
+
 		catch (InvalidUserInputException &yourAge)
 		{
 			cout << yourAge.what() << "An error occurs\n";
+			//break;
 		}
-	}
-
+		catch (...)
+		{
+			cout << "not valid input\n";
+			//break;
+		}
+	
 	return 0;
-	delete pointRightChoice, rightChoice;
 }
