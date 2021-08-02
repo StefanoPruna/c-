@@ -25,7 +25,7 @@ string* pointSecondChoice = &playerSecondChoice;
 string* pointThirdChoice = &playerThirdChoice;
 string* pointFinish = &playerFinish;
 string* pointAnswer = &answer;
-bool* pointRightChoice = &rightChoice;
+//bool* pointRightChoice = &rightChoice;
 int* pDice = &dice; 
 
 //Pointing to the monster's ability
@@ -33,15 +33,47 @@ string* pointName = &monsterPlay.monsterName;
 int* pointMonsterHealth = &monsterPlay.healthEnemy;
 int* pointMonsterDamage = &monsterPlay.damage;
 
+//Exception handling for when calling the exitTheGame function
+class InvalidUserInputException : public exception
+{
+public:
+	virtual const char* what() const throw()
+	{
+		return "Invalid input exception\n";
+	}
+};
+
 //This function is called when the player wants to exit the game
 int exitTheGame()
 {
-	system("pause");
-	cout << "\033[2J\033[H"; //Refresh the screen
-	cout << "Ok, thank you for coming, have a nice day! I'm going to make a coffee...\n";
-	system("pause");
+	cout << "Are you sure you want to exit the game? Yes or No\n";
+	cin >> *pointPlayerChoice;
+
+	try
+	{
+		if (*pointPlayerChoice == "Yes" || *pointPlayerChoice == "yes")
+		{
+			system("pause");
+			cout << "\033[2J\033[H"; //Refresh the screen
+			cout << "Ok, thank you for coming, have a nice day! I'm going to make a coffee...\n";
+			system("pause");
+			exit(1);
+		}
+		else
+		{
+			throw InvalidUserInputException();
+			cout << "Invalid input\n";
+			exitTheGame();
+		}
+	}
+	catch (InvalidUserInputException &pointPlayerChoice)
+	{
+		cout << pointPlayerChoice.what() << "You type the wrong input\n";
+		exitTheGame();
+	}
 
 	return 0;
+	delete pointPlayerChoice;
 }
 
 //This function is called at the end of a battle
@@ -50,7 +82,7 @@ int drinkPotion(int health, int strength, int coins, int potion, int zone)
 	cout << "\033[2J\033[H"; //Refresh the screen
 	if (potion > 0)
 	{
-		while (*pointRightChoice == false)
+		while (rightChoice == false)
 		{
 			cout << "Your health is " << health << " and you have " << potion << " potion/s left.\n"
 				"Would you like to drink the potion of health? Yes / No\n";
@@ -62,14 +94,14 @@ int drinkPotion(int health, int strength, int coins, int potion, int zone)
 				cout << "Your health now is " << health << " and you have " << potion << " potion/s left.\n";
 				system("pause");
 				resume.keepGoing(health, strength, coins, potion, zone);//calls this function to check what zone restart the game
-				*pointRightChoice = true;
+				rightChoice = true;
 			}
 			else if (*pointPlayerChoice == "No" || *pointPlayerChoice == "no")
 			{
 				cout << "Ok, let's keep going with the adventure!\n";
 				system("pause");
 				resume.keepGoing(health, strength, coins, potion, zone); //calls this function to check what zone restart the game
-				*pointRightChoice = true;
+				rightChoice = true;
 			}
 			else
 			{
@@ -86,7 +118,7 @@ int drinkPotion(int health, int strength, int coins, int potion, int zone)
 	}
 
 	return health, strength, coins, potion, zone;
-	delete pointRightChoice, pointPlayerChoice, playerChoice, rightChoice; //remove all the var from the memory that is not needed anymore
+	delete pointPlayerChoice, playerChoice, rightChoice; //remove all the var from the memory that is not needed anymore
 }
 
 //All the fighting monsters functions; the functions are called when the player encounters a monster and decides to attack
@@ -121,7 +153,7 @@ int fightMonster(int health, int strength, int coins, int potion, int zone)
 			system("pause");
 			if (health > 0 && potion > 0)
 			{
-				while (*pointRightChoice == false)
+				while (rightChoice == false)
 				{
 					"Would you like to drink the potion of health? Yes / No\n";
 					cin >> *pointPlayerChoice;
@@ -131,13 +163,13 @@ int fightMonster(int health, int strength, int coins, int potion, int zone)
 						potion -= 1;
 						cout << "Your health now is " << health << " and you have " << potion << " potion/s left.\n";
 						system("pause");
-						*pointRightChoice = true;
+						rightChoice = true;
 					}
 					else if (*pointPlayerChoice == "No" || *pointPlayerChoice == "no")
 					{
 						cout << "Ok, let's keep going with the adventure!\n";
 						system("pause");
-						*pointRightChoice = true;
+						rightChoice = true;
 					}
 					else
 					{
@@ -155,7 +187,7 @@ int fightMonster(int health, int strength, int coins, int potion, int zone)
 			//If character's health reached zero, the player can chooses to restart the game
 			else if (health <= 0)
 			{
-				while (*pointRightChoice == false)
+				while (rightChoice == false)
 				{
 					cout << "Oh no! I'm sorry to tell you, but you are basically, how I say it... YOU ARE DEAD!!!"
 						"Would you like to try again? Yes / No\n";
@@ -166,7 +198,7 @@ int fightMonster(int health, int strength, int coins, int potion, int zone)
 					{
 						health += 10;
 						resume.keepGoing(health, strength, coins, potion, zone);
-						*pointRightChoice = true;
+						rightChoice = true;
 					}
 					else
 						cout << "Sorry, do you want to try again, or not?!\n";
@@ -189,7 +221,7 @@ int fightMonster(int health, int strength, int coins, int potion, int zone)
 
 	return health, strength, coins, potion, zone;
 	//remove all the variables from the memory
-	delete pointName, pointMonsterDamage, pointMonsterHealth, pDice, pointRightChoice, pointFinish, playerFinish, dice, monsterPlay.monsterName, monsterPlay.healthEnemy, monsterPlay.damage;
+	delete pointMonsterDamage, pointMonsterHealth, pDice, pointFinish;
 }
 
 //This function is called when player chose to run from the monster instead of fighting
@@ -209,7 +241,7 @@ int runFromMonster(int health, int strength, int coins, int potion, int zone)
 		cout << "\033[2J\033[H"; //Refresh the screen
 		if (health <= 0)
 		{
-			while (*pointRightChoice == false)
+			while (rightChoice == false)
 			{
 				cout << "Oh no! I'm sorry to tell you, but you are basically, how I say it... YOU ARE DEAD!!!"
 					"Would you like to try again? Yes / No\n";
@@ -220,7 +252,7 @@ int runFromMonster(int health, int strength, int coins, int potion, int zone)
 				{
 					health += 10;
 					resume.keepGoing(health, strength, coins, potion, zone);
-					*pointRightChoice = true;
+					rightChoice = true;
 				}
 				else
 					cout << "Sorry, do you want to try again, or not?!\n";
@@ -237,7 +269,7 @@ int runFromMonster(int health, int strength, int coins, int potion, int zone)
 	}
 
 	return health, strength, coins, potion, zone;
-	delete pDice, pointRightChoice, pointFinish, dice, rightChoice, playerFinish;//remove the variables from the memory that is not needed anymore
+	delete pDice, pointFinish, dice, rightChoice, playerFinish;//remove the variables from the memory that is not needed anymore
 }
 
 //Third part of the game
@@ -246,16 +278,23 @@ int partThree(int health, int strength, int coins, int potion, int zone)
 	cout << "this is the third part\n"
 	"Do you want to go back or keep going?\n";
 	cin >> *pointAnswer;
-	if (*pointAnswer == "yes")
-		resume.keepGoing(health, strength, coins, potion, zone - 1);
-	else
+	/*try
 	{
-		cout << "let's stay in the zone " << zone << "\n";
-		resume.keepGoing(health, strength, coins, potion, zone + 1);
+		if (*pointAnswer == "yes")
+			resume.keepGoing(health, strength, coins, potion, zone - 1);
+		else
+		{
+			cout << "let's stay in the zone " << zone << "\n";
+			resume.keepGoing(health, strength, coins, potion, zone + 1);
+		}
 	}
+	catch (InvalidUserInputException &pointAnswer)
+	{
+		cout << "Invalid input\n";
+	}	*/
 
 	return health, strength, coins, potion, zone;
-	delete pointRightChoice, pointAnswer, rightChoice, answer;//remove all the var from the memory that is not needed anymore
+	delete pointAnswer, rightChoice, answer;//remove all the var from the memory that is not needed anymore
 }
 
 //Second part of the game
@@ -265,7 +304,7 @@ int partTwo(int health, int strength, int coins, int potion, int zone)
 		"Do you want to keep going? (Yes or No)\n"
 		"If No, you will go back to the previous section\n";
 	cin >> *pointAnswer;
-	while (*pointRightChoice == false)
+	while (rightChoice == false)
 	{
 		if (*pointAnswer == "yes" || *pointAnswer == "Yes")
 		{
@@ -282,7 +321,7 @@ int partTwo(int health, int strength, int coins, int potion, int zone)
 	}
 
 	return health, strength, coins, potion, zone;
-	delete pointRightChoice, pointAnswer, rightChoice, answer;//remove all the var from the memory that is not needed anymore
+	delete pointAnswer, rightChoice, answer;//remove all the var from the memory that is not needed anymore
 }
 
 //First part of the game
@@ -290,13 +329,13 @@ int partOne(int health, int strength, int coins, int potion, int zone)
 {
 	//zone = 1; //Needed to indentify at what part of the adventure the player is
 
-	while (*pointRightChoice == false)
+	while (rightChoice == false)
 	{
 		cout << "Once inside of the tower, you have a fork, where do you go? Left, Right\n";
 		cin >> *pointPlayerChoice;
 		if (*pointPlayerChoice == "Left" || *pointPlayerChoice == "left")
 		{
-			while (*pointRightChoice == false)
+			while (rightChoice == false)
 			{
 				cout << "A Goblin is approaching you, he is in attack mode!\n"
 					"What do you do? Fight or Run?\n";
@@ -306,12 +345,12 @@ int partOne(int health, int strength, int coins, int potion, int zone)
 					//Calls the functions to fight against the Goblin monster
 					monsterPlay.whatEnemy("Goblin");
 					fightMonster(health, strength, coins, potion, zone);
-					*pointRightChoice = true;
+					rightChoice = true;
 				}
 				else if (*pointSecondChoice == "run" || *pointSecondChoice == "Run")
 				{
 					runFromMonster(health, strength, coins, potion, zone);
-					*pointRightChoice = true;
+					rightChoice = true;
 				}
 				else //If player doesn't choose the correct input, it will repeat the loop
 					cout << "You can only fight or run...what's your choice?\n";
@@ -319,7 +358,7 @@ int partOne(int health, int strength, int coins, int potion, int zone)
 		}
 		else if (*pointPlayerChoice == "Right" || *pointPlayerChoice == "right")
 		{
-			while (*pointRightChoice == false)
+			while (rightChoice == false)
 			{
 				cout << "You choose Right. A Skeleton is attacking you!\n"
 					"What do you do? Fight or Run?\n";
@@ -329,12 +368,12 @@ int partOne(int health, int strength, int coins, int potion, int zone)
 					//Calls the functions to fight against the Goblin monster
 					monsterPlay.whatEnemy("Skeleton");
 					fightMonster(health, strength, coins, potion, zone);
-					*pointRightChoice = true;
+					rightChoice = true;
 				}
 				else if (*pointThirdChoice == "run" || *pointThirdChoice == "Run")
 				{
 					runFromMonster(health, strength, coins, potion, zone);
-					*pointRightChoice = true;
+					rightChoice = true;
 				}
 				else //If player doesn't choose the correct input, it will repeat the loop
 					cout << "You can only fight or run...what's your choice?\n";
@@ -348,7 +387,7 @@ int partOne(int health, int strength, int coins, int potion, int zone)
 
 	return health, strength, coins, potion, zone;
 	//remove the bool var from the memory that is not needed anymore
-	delete pointRightChoice, pointPlayerChoice, pointSecondChoice, pointThirdChoice, rightChoice, playerChoice, playerSecondChoice, playerThirdChoice;
+	delete pointPlayerChoice, pointSecondChoice, pointThirdChoice, rightChoice, playerChoice, playerSecondChoice, playerThirdChoice;
 }
 
 //This function is called when the story is still going after a fight, after drinking a potion or player dies etc...
