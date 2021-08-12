@@ -6,6 +6,8 @@
 #include "Enemy.h"
 #include "Inventory.h"
 #include "resumeGame.h"
+//#include "FightMonster.h"
+//#include "PartOne.h"
 
 using namespace std;
 
@@ -18,6 +20,9 @@ int main()
 	Player yourChoice;
 	//Inventory playerInventory;
 	resumeGame storyTell;
+	/*FightMonster fightMonster;
+	PartOne partOne;*/
+
 	
 	//The game starts here
 	cout << "	***************************************\n"
@@ -51,7 +56,7 @@ int main()
 	//calling the function, first part of the adventure
 	storyTell.keepGoing(playerHealth, playerStrength, coins, potion, 1);
 
-	return 0;
 	//remove the inventory constructor from memory
 	delete inventory;
+	return 0;	
 }

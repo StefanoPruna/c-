@@ -18,5 +18,8 @@
     <ClCompile Include="startingWithC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\9465_Stefano_tut4_task1\Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
