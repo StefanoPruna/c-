@@ -7,6 +7,7 @@
 
 using namespace std;
 
+//This class is needed for resuming the game from where left after a fight, or any other encounter etc...
 class resumeGame
 {
 public:

@@ -58,7 +58,7 @@ void EmployeeAdmin()
 	//in order to read the external text file, we assign it to a string variable
 	string employeeFile;
 	empinput2 >> employeeFile;
-
+		
 	//creating a boolean variable to exit the while loop
 	bool keepGoing = true;
 
